@@ -1,0 +1,27 @@
+{
+  "name": "mecab",
+  "version": "0.1.0",
+  "description": "node-mecab",
+  "main": "lib/mecab.js",
+  "scripts": {
+    "install": "node-gyp rebuild",
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sogaani/node-mecab.git"
+  },
+  "keywords": [
+    "mecab"
+  ],
+  "author": "sogaani",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sogaani/node-mecab/issues"
+  },
+  "homepage": "https://github.com/sogaani/node-mecab#readme",
+  "dependencies": {
+    "diff": "^3.5.0",
+    "nan": "^2.11.0"
+  }
+}

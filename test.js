@@ -1,4 +1,4 @@
-var MeCab = require('./build/default/mecab');
+var MeCab = require('./');
 
 //そのまま使えば普通の出力だよん
 var nomal = new MeCab.Tagger();

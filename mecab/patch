@@ -1,0 +1,35 @@
+diff -up mecab_old/mecab-master/mecab/src/common.h mecab/mecab-master/mecab/src/common.h
+--- mecab_old/mecab-master/mecab/src/common.h	2018-03-18 07:25:36.000000000 +0900
++++ mecab/mecab-master/mecab/src/common.h	2018-09-12 21:23:37.893022100 +0900
+@@ -86,6 +86,7 @@
+ #define WPATH_FORCE(path) (MeCab::Utf8ToWide(path).c_str())
+ #define WPATH(path) (path)
+ #else
++#define WPATH_FORCE(path) (MeCab::Utf8ToWide(path).c_str())
+ #define WPATH(path) WPATH_FORCE(path)
+ #endif
+ #else
+diff -up mecab_old/mecab-master/mecab/src/feature_index.cpp mecab/mecab-master/mecab/src/feature_index.cpp
+--- mecab_old/mecab-master/mecab/src/feature_index.cpp	2018-03-18 07:25:36.000000000 +0900
++++ mecab/mecab-master/mecab/src/feature_index.cpp	2018-09-12 21:29:55.385698500 +0900
+@@ -353,7 +353,7 @@ bool FeatureIndex::buildUnigramFeature(L
+               if (!r) goto NEXT;
+               os_ << r;
+             } break;
+-            case 't':  os_ << (size_t)path->rnode->char_type;     break;
++            case 't':  os_ << (unsigned int)path->rnode->char_type;     break;
+             case 'u':  os_ << ufeature; break;
+             case 'w':
+               if (path->rnode->stat == MECAB_NOR_NODE) {
+diff -up mecab_old/mecab-master/mecab/src/writer.cpp mecab/mecab-master/mecab/src/writer.cpp
+--- mecab_old/mecab-master/mecab/src/writer.cpp	2018-03-18 07:25:36.000000000 +0900
++++ mecab/mecab-master/mecab/src/writer.cpp	2018-09-12 21:32:50.985834400 +0900
+@@ -257,7 +257,7 @@ bool Writer::writeNode(Lattice *lattice,
+             // input sentence
+           case 'S': os->write(lattice->sentence(), lattice->size()); break;
+             // sentence length
+-          case 'L': *os << lattice->size(); break;
++          case 'L': *os << (unsigned int)lattice->size(); break;
+             // morph
+           case 'm': os->write(node->surface, node->length); break;
+           case 'M': os->write(reinterpret_cast<const char *>
